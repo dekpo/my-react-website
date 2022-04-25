@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Home /> } />
           <Route path="/portfolio" element={ <Portfolio /> } />
-          <Route path="/contact" element={ <Contact /> } />
+          <Route path="/contact" element={ <Contact bidule="Coucou les zamis !!!" /> } />
         </Routes>
       </BrowserRouter>
       <Footer />
