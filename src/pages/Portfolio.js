@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Card from '../components/Card';
+import Pagination from '../components/Pagination';
 
 const Portfolio = () => {
     // on déclare la variable joke ET sa fonction/méthode setJoke
@@ -14,9 +15,14 @@ const Portfolio = () => {
             })
     }
 
+    const nextPage = (page) => {
+        setPage(page);
+        console.log("Page:",page)
+    }
+    let [page, setPage] = useState(1);
     let [gallery, setGallery] = useState([]);
     const loadPics = () => {
-        fetch("https://picsum.photos/v2/list?page=2&limit=3")
+        fetch("https://picsum.photos/v2/list?page=" + page + "&limit=3")
             .then(response => response.json())
             .then(data => {
                 setGallery(data);
@@ -27,7 +33,7 @@ const Portfolio = () => {
     // qui permet d'accéder ici à l'état 'compentDidMount' du composant
     // comme le ngOnInit ;) 
     useEffect(() => loadJoke, []);
-    useEffect(() => loadPics, []);
+    useEffect(() => loadPics, [page]);
 
     return (
         <section>
@@ -39,25 +45,32 @@ const Portfolio = () => {
                         <p>{joke}</p>
                     </div>
                 </div>
+
                 <div className="row">
                     <div className="col">
-                        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte...</p>
+                        <Pagination page={page} nextPage={nextPage} />
                     </div>
                 </div>
+
                 <div className="row">
                     {
                         gallery.map((item) => {
                             let source = `https://picsum.photos/id/${item.id}/640/380`;
                             let title = `Picture by ${item.author}`;
                             let id = item.id;
-                            let dim = {'width':item.width, 'height':item.height };
+                            let dim = { 'width': item.width, 'height': item.height };
                             return (
-                             <Card key={id} source={source} title={title} dim={dim} />
-                        )
-                    })
+                                <Card key={id} source={source} title={title} dim={dim} />
+                            )
+                        })
                     }
-                                </div>
                 </div>
+                <div className="row">
+                    <div className="col">
+                        <Pagination page={page} nextPage={nextPage} />
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }
