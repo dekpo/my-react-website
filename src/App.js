@@ -18,6 +18,7 @@ function App() {
           <Route path="/" element={ <Home /> } />
           <Route path="/portfolio" element={ <Portfolio /> } />
           <Route path="/contact" element={ <Contact bidule="Coucou les zamis !!!" /> } />
+          <Route path="*" element={ <Home /> } />
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -26,10 +26,8 @@ const Portfolio = () => {
     // useEffect est une hook
     // qui permet d'accéder ici à l'état 'compentDidMount' du composant
     // comme le ngOnInit ;) 
-    useEffect(() => {
-        loadJoke();
-        loadPics();
-    }, []);
+    useEffect(() => loadJoke, []);
+    useEffect(() => loadPics, []);
 
     return (
         <section>
@@ -37,7 +35,7 @@ const Portfolio = () => {
                 <div className="row">
                     <div className="col">
                         <h1>Portfolio</h1>
-                        <button onClick={loadJoke}>Chuck Norris ?</button>
+                        <button className="btn btn-dark" onClick={loadJoke}>Chuck Norris ?</button>
                         <p>{joke}</p>
                     </div>
                 </div>
@@ -49,11 +47,12 @@ const Portfolio = () => {
                 <div className="row">
                     {
                         gallery.map((item) => {
-                            let source = `https://picsum.photos/id/${item.id}/320/240`;
+                            let source = `https://picsum.photos/id/${item.id}/640/380`;
                             let title = `Picture by ${item.author}`;
                             let id = item.id;
+                            let dim = {'width':item.width, 'height':item.height };
                             return (
-                             <Card key={id} source={source} title={title} />
+                             <Card key={id} source={source} title={title} dim={dim} />
                         )
                     })
                     }
