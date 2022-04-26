@@ -22,7 +22,7 @@ const Portfolio = () => {
     let [page, setPage] = useState(1);
     let [gallery, setGallery] = useState([]);
     const loadPics = () => {
-        fetch("https://picsum.photos/v2/list?page=" + page + "&limit=3")
+        fetch("https://picsum.photos/v2/list?page=" + page + "&limit=6")
             .then(response => response.json())
             .then(data => {
                 setGallery(data);
@@ -32,8 +32,8 @@ const Portfolio = () => {
     // useEffect est une hook
     // qui permet d'accéder ici à l'état 'compentDidMount' du composant
     // comme le ngOnInit ;) 
-    useEffect(() => loadJoke, []);
-    useEffect(() => loadPics, [page]);
+    //useEffect(() => loadJoke, []);
+    useEffect(() => loadPics, [page]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section>
@@ -60,7 +60,7 @@ const Portfolio = () => {
                             let id = item.id;
                             let dim = { 'width': item.width, 'height': item.height };
                             return (
-                                <Card key={id} source={source} title={title} dim={dim} />
+                                <Card key={id} id={id} source={source} title={title} dim={dim} />
                             )
                         })
                     }

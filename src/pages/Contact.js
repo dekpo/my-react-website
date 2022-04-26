@@ -3,7 +3,7 @@ import React from "react"
 class Contact extends React.Component {
     constructor(props){
        super(props);
-       alert('this is a constructor alert...')
+       //alert('this is a constructor alert...')
     }
 
 
